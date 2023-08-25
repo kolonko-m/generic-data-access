@@ -1,0 +1,31 @@
+{
+	"name" : "kolonko-m/generic-data-access",
+	"type" : "library",
+	"description" : "The Generic Data Access library provides a library for accessing database systems in a generic fashion creating a facade to the business logic. This includes all kinds of databases and the concept of polyglot persistence.",
+	"authors" : [{
+			"name" : "Matthias Kolonko",
+			"email" : "matthias.kolonko@th-augsburg.de"
+		}
+	],
+	"license" : "LGPL-3.0-only",
+	"require" : {
+		"php" : ">=7.4",
+		"ext-calendar" : "*",
+		"ext-date" : "*",
+		"ext-intl" : "*",
+		"ext-pdo" : "*",
+		"ext-reflection" : "*",
+		"jkingweb/druuid" : "3.*",
+		"pentagonal/phpass" : "1.1.*"
+	},
+	"suggest" : {
+		"ext-pdo_mysql" : "*",
+		"ext-pdo_pgsql" : "*",
+		"ext-ldap" : "*"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"GDA\\" : "src/"
+		}
+	}
+}

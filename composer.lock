@@ -1,0 +1,124 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "ded8740b8fa87350d0d40e8b467cd34d",
+    "packages": [
+        {
+            "name": "jkingweb/druuid",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JKingweb/DrUUID.git",
+                "reference": "ca88019069f03ee9c0b1bb6b0200f421bbc9607e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JKingweb/DrUUID/zipball/ca88019069f03ee9c0b1bb6b0200f421bbc9607e",
+                "reference": "ca88019069f03ee9c0b1bb6b0200f421bbc9607e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-bcmath": "Supported alternative to GMP on 32-bit systems",
+                "ext-gmp": "Recommended on 32-bit installations for time-base UUIDs",
+                "phpseclib/phpseclib": "Supported alternative to GMP or BC Math on 32-bit systems (either v1.x or v2.x)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JKingWeb\\DrUUID\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "J. King",
+                    "email": "jking@jkingweb.ca",
+                    "homepage": "https://jkingweb.ca/"
+                }
+            ],
+            "description": "DrUUID RFC 4122 library for PHP",
+            "keywords": [
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/JKingweb/DrUUID/issues",
+                "source": "https://github.com/JKingweb/DrUUID/tree/3.0.0"
+            },
+            "time": "2017-02-09T14:17:01+00:00"
+        },
+        {
+            "name": "pentagonal/phpass",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pentagonal/phpass.git",
+                "reference": "cf998e89b3c6caa96ea15246a2d754d692e9be49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pentagonal/phpass/zipball/cf998e89b3c6caa96ea15246a2d754d692e9be49",
+                "reference": "cf998e89b3c6caa96ea15246a2d754d692e9be49",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Pentagonal\\PhPass": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Public Domain"
+            ],
+            "authors": [
+                {
+                    "name": "Solar Designer",
+                    "email": "solar@openwall.com",
+                    "homepage": "http://openwall.com/phpass/"
+                }
+            ],
+            "description": "PHP password hashing library original by open wall PhPass",
+            "homepage": "http://github.com/pentagonal/phpass/",
+            "keywords": [
+                "blowfish",
+                "crypt",
+                "hash",
+                "password",
+                "security"
+            ],
+            "support": {
+                "issues": "https://github.com/pentagonal/phpass/issues",
+                "source": "https://github.com/pentagonal/phpass/tree/master"
+            },
+            "time": "2017-01-16T06:08:14+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.4",
+        "ext-calendar": "*",
+        "ext-date": "*",
+        "ext-intl": "*",
+        "ext-pdo": "*",
+        "ext-reflection": "*"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
