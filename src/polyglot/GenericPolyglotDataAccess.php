@@ -3,6 +3,7 @@ namespace GDA\polyglot;
 
 use InvalidArgumentException;
 use GDA\{GenericDataIF,DataAccessorMap,Entity};
+use GDA\exceptions\PolyglotException;
 
 /**
  * XXX add coordinator database later
@@ -312,5 +313,3 @@ class GenericPolyglotDataAccess implements GenericDataIF {
   }
   
 }
-
-class PolyglotException extends \Exception {};

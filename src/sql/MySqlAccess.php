@@ -1,5 +1,5 @@
 <?php
-namespace GDA\SQL;
+namespace GDA\sql;
 
 /** This class implements the functions necessary for the MySQL access */
 class MySqlAccess extends GenericSqlAccess implements SqlAccessIf {

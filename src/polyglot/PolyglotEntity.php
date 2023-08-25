@@ -3,6 +3,7 @@ namespace GDA\polyglot;
 
 use InvalidArgumentException;
 use GDA\Entity;
+use GDA\exceptions\PolyglotException;
 
 abstract class PolyglotEntity extends Entity {
   

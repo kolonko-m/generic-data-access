@@ -1,5 +1,5 @@
 <?php 
-namespace GDA\SQL;
+namespace GDA\sql;
 
 use Exception;
 use ReflectionClass;

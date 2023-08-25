@@ -1,5 +1,5 @@
 <?php
-namespace GDA\LDAP;
+namespace GDA\ldap;
 
 use Exception;
 use GDA\Entity;
