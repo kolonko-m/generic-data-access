@@ -3,6 +3,8 @@ namespace GDA\sql;
 
 /** This class implements the functions necessary for the MySQL access */
 class MySqlAccess extends GenericSqlAccess implements SqlAccessIf {
+    
+  const DEFAULT_PORT = 3306;
   
   /**
    * Establishes a connection to a MySQL-Server with the given data.
@@ -17,7 +19,9 @@ class MySqlAccess extends GenericSqlAccess implements SqlAccessIf {
    * @param integer $encStrength  The strength of the encryption for new passwords (between 4 and 31). Default: 8
    * @throws \Exception  if the connection can't be established
    */
-  public function __construct(string $user, string $pwd, string $database, string $prefix, string $encoding, int $encStrength, string $host="localhost", int $port=3306){
+  public function __construct(string $user, string $pwd, string $database, string $prefix, string $encoding, int $encStrength, string $host="localhost", ?int $port=self::DEFAULT_PORT){
+    if(is_null($port)) $port = self::DEFAULT_PORT;
+      
     $dsn = "mysql:host=$host;port=$port;dbname=$database";
     parent::__construct($user, $pwd, $dsn, $prefix, $encStrength);
     
