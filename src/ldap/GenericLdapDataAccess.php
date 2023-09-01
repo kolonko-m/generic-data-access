@@ -5,6 +5,7 @@ use Exception;
 use InvalidArgumentException;
 use IntlDateFormatter;
 use IntlTimeZone;
+use LDAP\Connection;
 use Pentagonal\PhPass\PasswordHash;
 use JKingWeb\DrUUID\UUID;
 use GDA\{GenericDataIF,Entity};
@@ -23,19 +24,19 @@ abstract class GenericLdapDataAccess implements GenericDataIF {
   
   const LDAP_NOT_FOUND      = 32;
   
-  private $ldapConn;
+  private readonly Connection $ldapConn;
   
-  protected string $baseDN;
+  protected readonly string $baseDN;
   
-  protected IntlDateFormatter $isoDateFormatter;
+  protected readonly IntlDateFormatter $isoDateFormatter;
   
-  protected IntlDateFormatter $ldapDateFormatter;
+  protected readonly IntlDateFormatter $ldapDateFormatter;
   
-  protected IntlDateFormatter $isoTimestampFormatter;
+  protected readonly IntlDateFormatter $isoTimestampFormatter;
   
-  protected IntlDateFormatter $ldapTimestampFormatter;
+  protected readonly IntlDateFormatter $ldapTimestampFormatter;
   
-  private PasswordHash $hash;
+  private readonly PasswordHash $hash;
   
   private int $taStatus;
   

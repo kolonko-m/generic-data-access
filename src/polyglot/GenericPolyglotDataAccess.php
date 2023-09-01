@@ -13,8 +13,8 @@ use GDA\exceptions\PolyglotException;
  */
 class GenericPolyglotDataAccess implements GenericDataIF {
   
-  private DataAccessorMap $accessorMap;
-  private array           $openAccessors = array();
+  private readonly DataAccessorMap $accessorMap;
+  private          array           $openAccessors = array();
   
   public function __construct(DataAccessorMap $accessorMap) {
     $this->accessorMap = $accessorMap;

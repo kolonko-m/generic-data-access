@@ -40,7 +40,7 @@ abstract class LdapEntity extends Entity {
   
   const FD_DN = array("dn", self::TYPE_DN, false, "dn");
   
-  public $dn;
+  public ?string $dn;
   
   public function adjustFieldValues(): void {}
   

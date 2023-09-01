@@ -3,7 +3,7 @@ namespace GDA;
 
 abstract class GenericDataAccess implements GenericDataIF {
   
-  protected DataAccessorMap $accessorMap;
+  protected readonly DataAccessorMap $accessorMap;
   
   public function __construct(DataAccessorMap $accessorMap) {
     $this->accessorMap = $accessorMap;

@@ -25,7 +25,7 @@ abstract class Entity {
    *  
    * @var original Entity  
    */
-  protected $original;
+  protected readonly $original;
   protected ?ReflectionClass $refl;
   
   public function __construct() {

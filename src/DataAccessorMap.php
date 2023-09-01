@@ -6,17 +6,13 @@ use GDA\exceptions\{InvalidAccessorTypeException,AccessorNotFoundException};
 
 class DataAccessorMap {
     
-    protected string $ifClass;
+    public readonly string $ifClass;
     
     protected array $dataAccessors = array();
     
     public function __construct(string $ifClass) {
         if (!(is_a($ifClass, GenericDataIF::class, true) || is_subclass_of($ifClass, GenericDataIF::class, true))) throw new InvalidArgumentException("$ifClass is not a subtype of ".GenericDataIF::class);
         $this->ifClass = $ifClass;
-    }
-    
-    public function getIfClass(): string {
-        return $this->ifClass;
     }
     
     public function registerDataAccessor(GenericDataIF $a) {

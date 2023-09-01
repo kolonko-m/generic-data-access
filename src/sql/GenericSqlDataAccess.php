@@ -22,7 +22,7 @@ abstract class GenericSqlDataAccess implements GenericDataIF {
      *
      * @var SqlAccessIf
      */
-    protected SqlAccessIf $sqlAccess;
+    public readonly SqlAccessIf $sqlAccess;
     
     /**
      * Create the general SQL access instance
@@ -35,10 +35,6 @@ abstract class GenericSqlDataAccess implements GenericDataIF {
     
     public function getHandlingUnit(): string {
         return SqlEntity::class;
-    }
-    
-    public function getSqlAccess(): SqlAccessIf {
-        return $this->sqlAccess;
     }
     
     /* Starting with functions inherited from Interface */

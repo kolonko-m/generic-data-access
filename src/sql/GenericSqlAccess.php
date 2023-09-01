@@ -24,14 +24,14 @@ abstract class GenericSqlAccess implements SqlAccessIf {
    *
    * @var string
    */
-  private $prefix;
+  private readonly string $prefix;
   
   /**
    * Holds the PDO object repsonsible for the database connection
    *
    * @var PDO
    */
-  private $conn;
+  private ?PDO $conn;
   
   /**
    * contains the already used SQL statements.
@@ -39,7 +39,7 @@ abstract class GenericSqlAccess implements SqlAccessIf {
    *
    * @var array
    */
-  private $stmtCache;
+  private array $stmtCache;
   
   /**
    * Holds the transaction status of the current session.
@@ -53,20 +53,20 @@ abstract class GenericSqlAccess implements SqlAccessIf {
    *
    * @var integer
    */
-  private $taStatus;
+  private int $taStatus;
   
   /**
    * The PasswordHash instance for hashing and checking passwords
    * @var PasswordHash
    */
-  private $hash;
+  private readonly PasswordHash $hash;
   
   /**
    * Stands in the transaction status variable for transactions being disabled.
    * @var integer
    * FIXME implement an alternative local transaction handling if not provided by DBMS
    */
-  const noTransactions = -9;
+  private const noTransactions = -9;
   
   /**
    * Instantiating only via subclasses as this one is abstract.
