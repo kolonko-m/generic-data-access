@@ -57,7 +57,7 @@ abstract class SqlEntity extends Entity {
   
   public function getTableName(): string {
     $tableName = $this->refl->getConstant(self::CONST_TABLENAME);
-    if (!$tableName) $tableName = get_class($this);
+    if (!$tableName) $tableName = $this->refl->getShortName();
     return $tableName;
   }
   
