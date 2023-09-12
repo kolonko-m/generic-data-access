@@ -51,7 +51,7 @@ abstract class LdapEntity extends Entity {
    * {@inheritDoc}
    * @see Entity::getKeyFields()
    */
-  public static function getKeyFields(): array {
+  public function getKeyFields(): array {
     $result=self::getReflection()->getConstant(self::RDN_DEF_NAME);
     if (!is_array($result) || !is_string($result[self::FIELD_DEF_POS_NAME])) 
       throw new Exception("LdapEntity '".static::class."' incorrectly configured - no field found: ".self::RDN_DEF_NAME);

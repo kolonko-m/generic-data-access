@@ -75,7 +75,7 @@ abstract class SqlEntity extends Entity {
     return $result;
   }
   
-  public static function getKeyFields(): array {
+  public function getKeyFields(): array {
     $result = self::getReflection()->getConstants();
     $match = "(".self::PREFIX_CONSTRAINT.self::PREFIX_DELIM.self::PREFIX_PRIMARY_KEY.self::PREFIX_DELIM.")";
     $result = array_filter($result, function($k) use ($match) {return preg_match($match, $k);}, ARRAY_FILTER_USE_KEY);
