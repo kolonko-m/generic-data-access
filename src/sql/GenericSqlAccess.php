@@ -205,7 +205,6 @@ abstract class GenericSqlAccess implements SqlAccessIf {
       if($values[$i]!==null){
         if(is_string($values[$i])){
           $values[$i] = trim($values[$i]);
-          $values[$i] = htmlspecialchars($values[$i], ENT_QUOTES | ENT_XHTML, mb_internal_encoding(), false); // TODO move that to the view layer!
           if($values[$i] == "''" || $values[$i] == '' || mb_strtoupper($values[$i]) == "'NULL'") $values[$i]=null;
         }
       }
