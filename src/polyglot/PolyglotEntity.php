@@ -170,22 +170,22 @@ abstract class PolyglotEntity extends Entity {
       }
   }
   
-  public function getFieldMapping(): array {
-    $result = $this->refl->getConstant(self::CN_FIELD_MAPPING);
-    if (!is_array($result))  throw new PolyglotException("PolyglotEntity '".get_class($this)."' incorrectly configured - no field found: ".self::CN_FIELD_MAPPING);
-    if (count($result) == 0) throw new PolyglotException("PolyglotEntity '".get_class($this)."' incorrectly configured - field mapping is empty");
+  public static function getFieldMapping(): array {
+    $result = self::getReflection()->getConstant(self::CN_FIELD_MAPPING);
+    if (!is_array($result))  throw new PolyglotException("PolyglotEntity '".static::class."' incorrectly configured - no field found: ".self::CN_FIELD_MAPPING);
+    if (count($result) == 0) throw new PolyglotException("PolyglotEntity '".static::class."' incorrectly configured - field mapping is empty");
     return $result;
   }
   
-  public function getConnectingAttributes(): array {
-    $result = $this->refl->getConstant(self::CN_CONNECTING_ATTRIBUTES);
-    if (!is_array($result))  throw new PolyglotException("PolyglotEntity '".get_class($this)."' incorrectly configured - no field found: ".self::CN_CONNECTING_ATTRIBUTES);
-    if (count($result) == 0) throw new PolyglotException("PolyglotEntity '".get_class($this)."' incorrectly configured - no connecting attributes set.");
+  public static function getConnectingAttributes(): array {
+    $result = self::getReflection()->getConstant(self::CN_CONNECTING_ATTRIBUTES);
+    if (!is_array($result))  throw new PolyglotException("PolyglotEntity '".static::class."' incorrectly configured - no field found: ".self::CN_CONNECTING_ATTRIBUTES);
+    if (count($result) == 0) throw new PolyglotException("PolyglotEntity '".static::class."' incorrectly configured - no connecting attributes set.");
     return $result;
   }
   
-  public function getPolyglotReferences(): array {
-    $result = $this->refl->getConstants();
+  public static function getPolyglotReferences(): array {
+    $result = self::getReflection()->getConstants();
     $match = self::PREFIX_REFERENCE.self::PREFIX_DELIM;
     $result = array_filter($result, function($k) use ($match){return strpos($k, $match) === 0;}, ARRAY_FILTER_USE_KEY);
     return $result;

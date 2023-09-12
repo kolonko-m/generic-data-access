@@ -55,27 +55,28 @@ abstract class SqlEntity extends Entity {
     }
   }
   
-  public function getTableName(): string {
-    $tableName = $this->refl->getConstant(self::CONST_TABLENAME);
-    if (!$tableName) $tableName = $this->refl->getShortName();
+  public static function getTableName(): string {
+  	$refl = self::getReflection();
+    $tableName = $refl->getConstant(self::CONST_TABLENAME);
+    if (!$tableName) $tableName = $refl->getShortName();
     return $tableName;
   }
   
-  public function getEntityDefinition(): array {
-    $result = $this->refl->getConstants();
+  public static function getEntityDefinition(): array {
+    $result = self::getReflection()->getConstants();
     $match = "(".self::PREFIX_FIELD_DEF.self::PREFIX_DELIM."|".self::PREFIX_CONSTRAINT.self::PREFIX_DELIM.")";
     $result = array_filter($result, function($k) use ($match){return preg_match($match, $k);}, ARRAY_FILTER_USE_KEY);
     return $result;
   }
   
-  public function getEntityDbUserAccess(): array {
-    $result=$this->refl->getConstant(self::CONST_USERACCESS);
-    if (!is_array($result)) throw new Exception("Entity '".get_class($this)."' incorrectly configured no field found: ".self::CONST_USERACCESS);
+  public static function getEntityDbUserAccess(): array {
+    $result=self::getReflection()->getConstant(self::CONST_USERACCESS);
+    if (!is_array($result)) throw new Exception("Entity '".static::class."' incorrectly configured no field found: ".self::CONST_USERACCESS);
     return $result;
   }
   
-  public function getKeyFields(): array {
-    $result = $this->refl->getConstants();
+  public static function getKeyFields(): array {
+    $result = self::getReflection()->getConstants();
     $match = "(".self::PREFIX_CONSTRAINT.self::PREFIX_DELIM.self::PREFIX_PRIMARY_KEY.self::PREFIX_DELIM.")";
     $result = array_filter($result, function($k) use ($match) {return preg_match($match, $k);}, ARRAY_FILTER_USE_KEY);
     if (count($result)<>1) throw new Exception("More or less than one primary key defined: ".count($result));
@@ -83,27 +84,27 @@ abstract class SqlEntity extends Entity {
     return array_combine($pkArray, $pkArray);
   }
   
-  public function getForeignKeyDefs(): array {
-    $result = $this->refl->getConstants();
+  public static function getForeignKeyDefs(): array {
+    $result = self::getReflection()->getConstants();
     $match = "(".self::PREFIX_CONSTRAINT.self::PREFIX_DELIM.self::PREFIX_FOREIGN_KEY.self::PREFIX_DELIM.")";
     $result = array_filter($result, function($k) use ($match) {return preg_match($match, $k);}, ARRAY_FILTER_USE_KEY);
     return $result;
   }
   
-  public function getReferencedTables(): array {
+  public static function getReferencedTables(): array {
     $result = array();
-    foreach ($this->getForeignKeyDefs() as $foreignKey) {
+    foreach (self::getForeignKeyDefs() as $foreignKey) {
       $result[] = $foreignKey[1][0];
     }
     $result = array_unique($result);
-    $result = array_diff($result, array($this->getTableName()));
+    $result = array_diff($result, array(self::getTableName()));
     return $result;
   }
   
-  public function getDefaultOrdering(): ?array {
-    $result=$this->refl->getConstant(self::CONST_DEFAULT_ORDERING);
+  public static function getDefaultOrdering(): ?array {
+    $result=self::getReflection()->getConstant(self::CONST_DEFAULT_ORDERING);
     if (!$result) return null;
-    if (!is_array($result)) throw new Exception("Entity '".get_class($this)."' incorrectly configured no field found: ".self::CONST_DEFAULT_ORDERING);
+    if (!is_array($result)) throw new Exception("Entity '".static::class."' incorrectly configured no field found: ".self::CONST_DEFAULT_ORDERING);
     return $result;
   }
   

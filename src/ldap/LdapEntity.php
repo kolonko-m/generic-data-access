@@ -51,31 +51,31 @@ abstract class LdapEntity extends Entity {
    * {@inheritDoc}
    * @see Entity::getKeyFields()
    */
-  public function getKeyFields(): array {
-    $result=$this->refl->getConstant(self::RDN_DEF_NAME);
+  public static function getKeyFields(): array {
+    $result=self::getReflection()->getConstant(self::RDN_DEF_NAME);
     if (!is_array($result) || !is_string($result[self::FIELD_DEF_POS_NAME])) 
-      throw new Exception("LdapEntity '".get_class($this)."' incorrectly configured - no field found: ".self::RDN_DEF_NAME);
+      throw new Exception("LdapEntity '".static::class."' incorrectly configured - no field found: ".self::RDN_DEF_NAME);
     return array($result[self::FIELD_DEF_POS_NAME]);
   }
   
-  public function getBaseDN(): ?string {
-    $result=$this->refl->getConstant(self::BASE_DN_NAME);
+  public static function getBaseDN(): ?string {
+    $result=self::getReflection()->getConstant(self::BASE_DN_NAME);
     if (is_bool($result) && !$result) return null;
-    if (!is_string($result)) throw new Exception("LdapEntity '".get_class($this)."' incorrectly configured - no field found: ".self::BASE_DN_NAME);
+    if (!is_string($result)) throw new Exception("LdapEntity '".static::class."' incorrectly configured - no field found: ".self::BASE_DN_NAME);
     return $result;
   }
   
-  public function getObjectClasses(): array {
-    $result=$this->refl->getConstant(self::OBJECT_CLASS_NAME);
-    if (!is_array($result)) throw new Exception("LdapEntity '".get_class($this)."' incorrectly configured - no field found: ".self::OBJECT_CLASS_NAME);
+  public static function getObjectClasses(): array {
+    $result=self::getReflection()->getConstant(self::OBJECT_CLASS_NAME);
+    if (!is_array($result)) throw new Exception("LdapEntity '".static::class."' incorrectly configured - no field found: ".self::OBJECT_CLASS_NAME);
     return $result;
   }
   
-  public function getMemberships(): array {
-    $result=$this->refl->getConstant(self::MEMBERSHIP_NAME);
+  public static function getMemberships(): array {
+    $result=self::getReflection()->getConstant(self::MEMBERSHIP_NAME);
     if (is_bool($result) && !$result) return array();
     if (is_null($result)) return array();
-    if (!is_array($result)) throw new Exception("LdapEntity '".get_class($this)."' incorrectly configured - no field found: ".self::MEMBERSHIP_NAME);
+    if (!is_array($result)) throw new Exception("LdapEntity '".static::class."' incorrectly configured - no field found: ".self::MEMBERSHIP_NAME);
     return $result;
   }
   

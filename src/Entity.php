@@ -26,7 +26,6 @@ abstract class Entity {
    * @var original Entity  
    */
   protected readonly Entity $original;
-  protected ?ReflectionClass $refl;
   
   public function __construct() {
     $this->__wakeup();
@@ -34,13 +33,10 @@ abstract class Entity {
     $this->original = clone $this;
   }
   
-  public function __wakeup() {
-    $this->refl = new ReflectionClass(get_class($this));
-  }
+  public function __wakeup() {}
   
   public function __sleep() {
-    $propertyNames = array_column($this->refl->getProperties(), 'name');
-    $this->refl = null;
+    $propertyNames = array_column(self::getReflection()->getProperties(), 'name');
     return $propertyNames;
   }
   
@@ -98,16 +94,20 @@ abstract class Entity {
     return clone $this->original;
   }
   
-  public function getFieldDefinitions(): array {
-    $result = $this->refl->getConstants();
+  protected static function getReflection(): ReflectionClass {
+  	return new ReflectionClass(static::class);
+  }
+  
+  public static function getFieldDefinitions(): array {
+    $result = self::getReflection()->getConstants();
     $match = "(".self::PREFIX_FIELD_DEF.self::PREFIX_DELIM.")";
     $result = array_filter($result, function($k) use ($match) {return preg_match($match, $k);}, ARRAY_FILTER_USE_KEY);
     return $result;
   }
   
-  public function getFieldDefinition(string $fieldName): array {
-    $result=$this->refl->getConstant(self::PREFIX_FIELD_DEF.self::PREFIX_DELIM.strtoupper($fieldName));
-    if (!is_array($result)) throw new Exception("No field definition in Entity '".get_class($this)."' found for requested field: ".$fieldName." - received: ".gettype($result));
+  public static function getFieldDefinition(string $fieldName): array {
+    $result=self::getReflection()->getConstant(self::PREFIX_FIELD_DEF.self::PREFIX_DELIM.strtoupper($fieldName));
+    if (!is_array($result)) throw new Exception("No field definition in Entity '".static::class."' found for requested field: ".$fieldName." - received: ".gettype($result));
     return $result;
   }
   
