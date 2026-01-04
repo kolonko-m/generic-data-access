@@ -98,7 +98,7 @@ abstract class GenericSqlDataAccess implements GenericDataIF {
         return $result;
     }
     
-    protected function formatColumnsForSelect(array $fieldDefinitions, string $prefix=null): array {
+    protected function formatColumnsForSelect(?string $prefix, array ...$fieldDefinitions): array {
         if (is_null($prefix)) $prefix="";
         if ($prefix != "") $prefix.=".";
         
@@ -155,7 +155,7 @@ abstract class GenericSqlDataAccess implements GenericDataIF {
         $columns = $this->amendColumnsByType($t, $columns);
         
         $stmt  = array();
-        $stmt[]="SELECT ".($count ? "count(*)" : implode("\n     , ", $this->formatColumnsForSelect($t->getFieldDefinitions())));
+        $stmt[]="SELECT ".($count ? "count(*)" : implode("\n     , ", $this->formatColumnsForSelect(null, ...$t->getFieldDefinitions())));
         $stmt[]="FROM ".$this->sqlAccess->getPrefix().$t->getTableName();
         if(count($searchValues) > 0) $stmt[]="WHERE ".implode("\n  AND " , array_map(function($c, $v){return $c."=".$v;}, array_keys($columns), $columns));
         
