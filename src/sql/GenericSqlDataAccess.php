@@ -99,21 +99,34 @@ abstract class GenericSqlDataAccess implements GenericDataIF {
     }
     
     protected function formatColumnsForSelect(?string $prefix, array ...$fieldDefinitions): array {
-        if (is_null($prefix)) $prefix="";
-        if ($prefix != "") $prefix.=".";
-        
-        $columns=array();
-        foreach($fieldDefinitions as $fieldDef) {
-            $fieldName = $fieldDef[SqlEntity::FIELD_DEF_POS_NAME];
-            switch($fieldDef[SqlEntity::FIELD_DEF_POS_TYPE]) {
-                case SqlEntity::TYPE_DATE:
-                    $columns[]=$this->sqlAccess->toChar($prefix.$fieldName)." AS ".$fieldName;
-                    break;
-                default:
-                    $columns[]=$prefix.$fieldName;
-            }
-        }
-        return $columns;
+        return $this->formatColumns($prefix, $fieldDefinitions, true);
+    }
+    
+    protected function formatColumnsForSql(?string $prefix, array ...$fieldDefinitions): array {
+    	return $this->formatColumns($prefix, $fieldDefinitions, false);
+    }
+    
+    private function formatColumns(?string $prefix, array $fieldDefinitions, bool $forSelect): array {
+    	if (is_null($prefix)) $prefix="";
+    	if ($prefix != "") $prefix.=".";
+    	
+    	$columns=array();
+    	foreach($fieldDefinitions as $fieldDef) {
+    		$fieldName = $fieldDef[SqlEntity::FIELD_DEF_POS_NAME];
+    		$result = $prefix.$fieldName;
+    		if(!$forSelect) {
+    			$columns[]=$result;
+    			continue;
+    		}
+    		switch($fieldDef[SqlEntity::FIELD_DEF_POS_TYPE]) {
+    			case SqlEntity::TYPE_DATE:
+    				$columns[]=$this->sqlAccess->toChar($result)." AS ".$fieldName;
+    				break;
+    			default:
+    				$columns[]=$result;
+    		}
+    	}
+    	return $columns;
     }
     
     protected abstract function checkEntityPermission(SqlEntity $e): void ;
